@@ -1,9 +1,8 @@
 import { gql } from "apollo-server-express";
 
 const typeDefs = gql`
-
-#grapql no tiene el tipo Date por lo cual se declara como un scalar para poder usarlo luego
- scalar Date
+  #grapql no tiene el tipo Date por lo cual se declara como un scalar para poder usarlo luego
+  scalar Date
   enum Enum_EstadoUsuario {
     PENDIENTE
     AUTORIZADO
@@ -42,6 +41,11 @@ const typeDefs = gql`
     descripcion: String!
     tipo: Enum_TipoObjetivo!
   }
+
+  input crearObjetivo {
+    descripcion: String!
+    tipo: Enum_TipoObjetivo!
+  }
   type Proyecto {
     _id: ID!
     nombre: String!
@@ -67,6 +71,7 @@ const typeDefs = gql`
       rol: Enum_Rol!
       estado: Enum_EstadoUsuario
     ): Usuario
+    
     editarUsuario(
       _id: String!
       nombre: String!
@@ -76,7 +81,9 @@ const typeDefs = gql`
       rol: Enum_Rol!
       estado: Enum_EstadoUsuario
     ): Usuario
+
     eliminarUsuario(_id: String, correo: String): Usuario
+
     crearProyecto(
       nombre: String!
       presupuesto: Float!
@@ -85,6 +92,7 @@ const typeDefs = gql`
       estado: Enum_EstadoProyecto!
       fase: Enum_FaseProyecto!
       lider: String!
+      objetivos: [crearObjetivo]
     ): Proyecto
   }
 `;
