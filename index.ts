@@ -6,7 +6,7 @@ import express from "express";
 import cors from "cors";
 import { ApolloServer } from "apollo-server-express";
 import dotenv from "dotenv";
-import { typeDefs } from "./graphql/types";
+import { tipos } from "./graphql/types";
 import { resolvers } from "./graphql/resolvers";
 
 dotenv.config();
@@ -15,7 +15,7 @@ dotenv.config();
 //1. resolvers
 //2. tipos
 const server = new ApolloServer({
-  typeDefs: typeDefs, //en una carpeta graphql se ponene los tipos y los resolvers
+  typeDefs: tipos, //en una carpeta graphql se ponene los tipos y los resolvers
   resolvers: resolvers,
 });
 const app = express();

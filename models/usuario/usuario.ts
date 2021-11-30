@@ -1,6 +1,6 @@
 //se debe importar el esquema y modelo de mongoose
 import { Schema, model } from 'mongoose';
-import { Enum_Rol, Enum_EstadoUsuario } from './enums';
+import { Enum_Rol, Enum_EstadoUsuario } from '../enums/enums';
 
 interface User {
   correo: string;
