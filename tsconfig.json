@@ -1,6 +1,0 @@
-{
-    "compilerOptions": {
-        "module": "commonJs",
-        "esModuleInterop": true,
-    }
-}

@@ -1,13 +1,13 @@
 //para poner esta sintaxis de import se debe modificar el package json
 //para los problemas de import de express cors y dotenv en el tsconfig se
 //crea el "esModuleInterop": true,
-import conectarBD from "./db/db";
+import conectarBD from "./db/db.js";
 import express from "express";
 import cors from "cors";
 import { ApolloServer } from "apollo-server-express";
 import dotenv from "dotenv";
-import { tipos } from "./graphql/types";
-import { resolvers } from "./graphql/resolvers";
+import { tipos } from "./graphql/types.js";
+import { resolvers } from "./graphql/resolvers.js";
 
 dotenv.config();
 

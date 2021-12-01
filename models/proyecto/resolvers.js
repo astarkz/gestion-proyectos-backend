@@ -2,12 +2,13 @@
 //query: es para pedir informacion, como el "GET" de REST
 //mutacion: es todo lo que puede cambiar, como ""PATCH, PUT, POST, DELETE" de REST
 
-import { ProjectModel } from './proyecto';
+import { ProjectModel } from './proyecto.js';
 
 const resolversProyecto = {
   Query: {
     Proyectos: async (parent, args) => {
-      const proyectos = await ProjectModel.find().populate('lider');
+      const proyectos = await 
+      ProjectModel.find().populate('avances').populate('inscripciones');
       return proyectos;
     },
   },
