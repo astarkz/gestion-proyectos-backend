@@ -4,12 +4,18 @@
 
 
 import { UserModel } from './usuario.js';
+import { InscriptionModel } from '../inscripcion/inscripcion.js';
 
 const resolversUsuario = {
+  Usuario: {
+    inscripciones: async (parent, args, context) => {
+      return InscriptionModel.find({ estudiante: parent._id });
+    },
+  },
   Query: {
-    Usuarios: async (parent, args) => {
-      console.log('parent usuario',parent)
-      const usuarios = await UserModel.find();
+    Usuarios: async (parent, args, context) => {
+      console.log('parent usuario', parent)
+      const usuarios = await UserModel.find({ ...args.filtro });
       return usuarios;
     },
     Usuario: async (parent, args) => {

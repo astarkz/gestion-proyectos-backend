@@ -1,6 +1,13 @@
 import { InscriptionModel } from './inscripcion.js';
+import { ProjectModel } from '../proyecto/proyecto.js';
 
 const resolverInscripciones = {
+  Inscripcion: {
+    proyecto: async (parent, args, context) => {
+      return await ProjectModel.findOne({ _id: parent.proyecto });
+    },
+  },
+
   Query: {
     Inscripciones: async (parent, args) => {
       const inscripciones = await InscriptionModel.find();
