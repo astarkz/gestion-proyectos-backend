@@ -70,7 +70,7 @@ const resolversUsuario = {
         apellido: args.apellido,
         identificacion: args.identificacion,
         correo: args.correo,
-        rol: args.rol,
+        //rol: args.rol,
         estado: args.estado,
       }, {new:true});
 
