@@ -15,11 +15,36 @@ const resolversUsuario = {
   Query: {
     Usuarios: async (parent, args, context) => {
       console.log('parent usuario', parent)
-      const usuarios = await UserModel.find({ ...args.filtro });
+      const usuarios = await UserModel.find({ ...args.filtro }).populate({
+        path: 'inscripciones', populate: {
+          path: 'proyecto',
+          populate: [{ path: 'lider' }, { path: 'avances' }],
+        },
+        })
+        .populate({
+          path: 'avancesCreados',
+          populate: {
+            path: 'proyecto',
+            populate: [{ path: 'lider' }, { path: 'avances' }],
+          },
+        });
       return usuarios;
     },
     Usuario: async (parent, args) => {
-      const usuario = await UserModel.findOne({ _id: args._id });
+      const usuario = await UserModel.findOne({ _id: args._id }).populate({
+          path: 'inscripciones',
+          populate: {
+            path: 'proyecto',
+            populate: [{ path: 'lider' }, { path: 'avances' }],
+          },
+        })
+        .populate({
+          path: 'avancesCreados',
+          populate: {
+            path: 'proyecto',
+            populate: [{ path: 'lider' }, { path: 'avances' }],
+          },
+        });
       return usuario;
     },
   },
