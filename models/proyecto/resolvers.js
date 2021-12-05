@@ -18,11 +18,7 @@ const resolversProyecto = {
   Query: {
     Proyectos: async (parent, args, context) => {
       const proyectos = await 
-      ProjectModel.find().populate('avances').populate([
-        { path: 'lider' },
-        { path: 'avances' },
-        { path: 'inscripciones', populate: { path: 'estudiante' } },
-      ]);
+      ProjectModel.find().populate('lider');
       return proyectos;
     },
   },
