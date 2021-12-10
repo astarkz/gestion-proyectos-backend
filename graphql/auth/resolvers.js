@@ -1,6 +1,6 @@
 import { UserModel } from '../../models/usuario/usuario.js';
 import bcrypt from 'bcrypt';
-import { generateToken } from '../../utils/tokenUtils.js';
+import { generateToken, validateToken } from '../../utils/tokenUtils.js';
 
 const resolversAutenticacion = {
   Mutation: {
@@ -44,12 +44,19 @@ const resolversAutenticacion = {
             }),
           };
         }
-    // },
+    
+      validateToken: async (parent, args, context) => {
+        console.log('contexto', context);
+        //   // valdiar que el contexto tenga info del usuario. si si, refrescar el token
+        //   // si no devolver null para que en el front redirija al login.
+      }
+    },
 
-    // validateToken: async (parent, args, context) => {
-    //   console.log('contexto', context);
-    //   // valdiar que el contexto tenga info del usuario. si si, refrescar el token
-    //   // si no devolver null para que en el front redirija al login.
+    validateToken: async (parent, args, context) => {
+      console.log('contexto: ', context);
+      // validar que el contexto tenga info del usuario. 
+      //Si refrescar el token
+      //si no devolver null para que en el front redirija al login
     },
   },
 };

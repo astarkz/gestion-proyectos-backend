@@ -14,7 +14,7 @@ const resolversUsuario = {
   },
   Query: {
     Usuarios: async (parent, args, context) => {
-      console.log('parent usuario', parent)
+      //console.log('parent usuario', parent) //undefined
       const usuarios = await UserModel.find({ ...args.filtro }).populate({
         path: 'inscripciones', populate: {
           path: 'proyecto',

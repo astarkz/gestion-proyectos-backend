@@ -8,8 +8,21 @@ import { ApolloServer } from "apollo-server-express";
 import dotenv from "dotenv";
 import { tipos } from "./graphql/types.js";
 import { resolvers } from "./graphql/resolvers.js";
+import { validateToken } from "./utils/tokenUtils.js";
 
 dotenv.config();
+
+//funcion para devolver los datos del usuarios dque estan dentro del token
+const getUserData = (token) => {
+  const verification = validateToken(token.split(' ')[1]);
+  //console.log("verifacion: ",verification)
+  if (verification.data) {
+    return verification.data;
+  } else {
+    return null;
+  }
+};
+
 
 //Al apollo server se le deben pasar dos propiedades
 //1. resolvers
@@ -17,6 +30,20 @@ dotenv.config();
 const server = new ApolloServer({
   typeDefs: tipos, //en una carpeta graphql se ponene los tipos y los resolvers
   resolvers: resolvers,
+  context: ({ req }) => {
+    //obtener el token del req
+    // console.log(req.headers.authorization)
+    const token = req.headers?.authorization ?? null;
+    if (token) {
+      const userData = getUserData(token);
+      if (userData) {
+        return { userData };
+      }
+      else {
+        return null;
+      }
+    }    
+  },
 });
 const app = express();
 app.use(express.json());
