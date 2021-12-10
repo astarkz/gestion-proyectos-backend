@@ -27,6 +27,32 @@ const resolversAutenticacion = {
         }),
       };
     },
+
+    login: async (parent, args) => {
+      console.log(args)
+      return {
+        token: "soy el token"
+      }
+    //   const usuarioEcontrado = await UserModel.findOne({ correo: args.correo });
+    //   if (await bcrypt.compare(args.password, usuarioEcontrado.password)) {
+    //     return {
+    //       token: generateToken({
+    //         _id: usuarioEcontrado._id,
+    //         nombre: usuarioEcontrado.nombre,
+    //         apellido: usuarioEcontrado.apellido,
+    //         identificacion: usuarioEcontrado.identificacion,
+    //         correo: usuarioEcontrado.correo,
+    //         rol: usuarioEcontrado.rol,
+    //       }),
+    //     };
+    //   }
+    // },
+
+    // validateToken: async (parent, args, context) => {
+    //   console.log('contexto', context);
+    //   // valdiar que el contexto tenga info del usuario. si si, refrescar el token
+    //   // si no devolver null para que en el front redirija al login.
+    },
   },
 };
 
