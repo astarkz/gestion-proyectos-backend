@@ -33,7 +33,7 @@ const server = new ApolloServer({
   context: ({ req }) => {
     //obtener el token del req
     // console.log(req.headers.authorization)
-    const token = req.headers?.authorization ?? null;
+    const token = req.headers?.authorization ?? null; //si hay token
     if (token) {
       const userData = getUserData(token);
       if (userData) {

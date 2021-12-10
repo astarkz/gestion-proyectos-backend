@@ -43,17 +43,26 @@ const resolversAutenticacion = {
                 rol: usuarioEcontrado.rol,
             }),
           };
-        }
-    
-      validateToken: async (parent, args, context) => {
-        console.log('contexto', context);
-        //   // valdiar que el contexto tenga info del usuario. si si, refrescar el token
-        //   // si no devolver null para que en el front redirija al login.
-      }
+        }     
     },
 
-    validateToken: async (parent, args, context) => {
+    refreshToken: async (parent, args, context) => {
       console.log('contexto: ', context);
+      const userData = context.userData
+      if (!userData) {
+        return{ error: "token no valido"}
+      } else {
+        return {
+            token: generateToken({
+              _id: userData._id,
+              nombre: userData.nombre,
+              apellido: userData.apellido,
+              identificacion: userData.identificacion,
+              correo: userData.correo,
+              rol: userData.rol,
+             }),
+          };
+      }
       // validar que el contexto tenga info del usuario. 
       //Si refrescar el token
       //si no devolver null para que en el front redirija al login
