@@ -60,7 +60,7 @@ const resolversAutenticacion = {
               identificacion: userData.identificacion,
               correo: userData.correo,
               rol: userData.rol,
-             }),
+            }),
           };
       }
       // validar que el contexto tenga info del usuario. 
