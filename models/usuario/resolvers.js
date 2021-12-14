@@ -10,26 +10,22 @@ import bcrypt from 'bcrypt';
 const resolversUsuario = {
   Usuario: {
     inscripciones: async (parent, args, context) => {
-      return InscriptionModel.find({ estudiante: parent._id });
+      return InscriptionModel.find({ estudiante: parent._id }).populate({
+        path: 'inscripciones'});
     },
   },
   Query: {
     Usuarios: async (parent, args, context) => {
-      console.log('contexto ', context)
+      //console.log('contexto ', context)
       //if (context.userData.rol === "ADMINISTRADOR") {
-        const usuarios = await UserModel.find().populate({
-        path: 'inscripciones', populate: {
-          path: 'proyecto',
-          populate: [{ path: 'lider' }, { path: 'avances' }],
+      const usuarios = await UserModel.find().populate([
+        {
+          path: 'proyectosLiderados'
         },
-        })
-        .populate({
-          path: 'avancesCreados',
-          populate: {
-            path: 'proyecto',
-            populate: [{ path: 'lider' }, { path: 'avances' }],
-         },
-        });
+        {
+          path: 'avancesCreados'
+      },
+      ])
         return usuarios;
       /* } else {
         return null
