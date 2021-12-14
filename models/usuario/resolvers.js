@@ -5,6 +5,7 @@
 
 import { UserModel } from './usuario.js';
 import { InscriptionModel } from '../inscripcion/inscripcion.js';
+import bcrypt from 'bcrypt';
 
 const resolversUsuario = {
   Usuario: {
@@ -15,8 +16,8 @@ const resolversUsuario = {
   Query: {
     Usuarios: async (parent, args, context) => {
       console.log('contexto ', context)
-      if (context.userData.rol === "ADMINISTRADOR") {
-        const usuarios = await UserModel.find({ ...args.filtro }).populate({
+      //if (context.userData.rol === "ADMINISTRADOR") {
+        const usuarios = await UserModel.find().populate({
         path: 'inscripciones', populate: {
           path: 'proyecto',
           populate: [{ path: 'lider' }, { path: 'avances' }],
@@ -27,12 +28,12 @@ const resolversUsuario = {
           populate: {
             path: 'proyecto',
             populate: [{ path: 'lider' }, { path: 'avances' }],
-          },
+         },
         });
         return usuarios;
-      } else {
+      /* } else {
         return null
-      }
+      }*/
       // else if (context.userData.rol === "ESTUDIANTE") {
       //   const usuarios = await UserModel.find({ rol: "ESTUDIANTE" })
       //   return usuarios;
@@ -59,12 +60,16 @@ const resolversUsuario = {
   },
   Mutation: {
     crearUsuario: async (parent, args) => {
+      const salt = await bcrypt.genSalt(10);
+      const hashedPassword = await bcrypt.hash(args.password, salt);
+
       const usuarioCreado = await UserModel.create({
         nombre: args.nombre,
         apellido: args.apellido,
         identificacion: args.identificacion,
         correo: args.correo,
         rol: args.rol,
+        password: hashedPassword,
       });
 
       if (Object.keys(args).includes('estado')) {

@@ -17,9 +17,19 @@ const resolversProyecto = {
   },
   Query: {
     Proyectos: async (parent, args, context) => {
-      const proyectos = await 
-      ProjectModel.find().populate('lider');
-      return proyectos;
+      //if (context.userData.rol === 'ADMINISTRADOR') {
+        const proyectos = await 
+        ProjectModel.find().
+          populate({
+            path: 'avances',
+            populate: { path: 'creadoPor'},
+      }).populate('lider');
+      return proyectos
+      /*} else {
+        const proyectos = await ProjectModel.find()
+        return proyectos
+      }*/
+      ;
     },
   },
   Mutation: {
