@@ -18,12 +18,16 @@ const resolversProyecto = {
   Query: {
     Proyectos: async (parent, args, context) => {
       //if (context.userData.rol === 'ADMINISTRADOR') {
-        const proyectos = await 
-        ProjectModel.find().
-          populate({
-            path: 'avances',
-            populate: { path: 'creadoPor'},
-      }).populate('lider');
+      const proyectos = await
+        ProjectModel.find()
+          //.populate([{
+          //   path: 'avances',
+          //   populate: { path: 'creadoPor' },
+          // },
+          //   {
+          //     path: 'lider',
+              // populate: { path: }
+        // }]);
       return proyectos
       /*} else {
         const proyectos = await ProjectModel.find()

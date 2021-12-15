@@ -24,6 +24,8 @@ const resolversUsuario = {
         },
         {
           path: 'avancesCreados'
+      },{
+          path: 'inscripciones'
       },
       ])
         return usuarios;
