@@ -30,7 +30,7 @@ const getUserData = (token) => {
 const server = new ApolloServer({
   typeDefs: tipos, //en una carpeta graphql se ponene los tipos y los resolvers
   resolvers: resolvers,
-  context: ({ req }) => {
+  context: ({ req, res }) => {
     //obtener el token del req
     // console.log(req.headers.authorization)
     const token = req.headers?.authorization ?? null; //si hay token

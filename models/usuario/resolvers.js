@@ -18,16 +18,9 @@ const resolversUsuario = {
     Usuarios: async (parent, args, context) => {
       //console.log('contexto ', context)
       //if (context.userData.rol === "ADMINISTRADOR") {
-      const usuarios = await UserModel.find().populate([
-        {
-          path: 'proyectosLiderados'
-        },
-        {
-          path: 'avancesCreados'
-      },{
-          path: 'inscripciones'
-      },
-      ])
+      const usuarios = await UserModel.find({...args.filtro})
+      //   .populate([{ path: 'proyectosLiderados' },
+      //   { path: 'avancesCreados' },{ path: 'inscripciones' }, ])
         return usuarios;
       /* } else {
         return null
