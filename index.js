@@ -56,5 +56,5 @@ app.listen({ port: process.env.PORT || 5000 }, async () => {
 
   server.applyMiddleware({ app }); //se agregan middelware para que use los mismo middlware de express
 
-  console.log("servidor listo");
+  console.log("servidor listo http://localhost:4000/graphql");
 });
