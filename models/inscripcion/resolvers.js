@@ -18,6 +18,7 @@ const resolverInscripciones = {
       if (context.userData) {
         if (context.userData.rol === 'LIDER') {
           const projects = await ProjectModel.find({ lider: context.userData._id });
+          console.log(context.userData._id)
           const projectList = projects.map((p) => p._id.toString());
           filtro = {
             proyecto: {
@@ -27,6 +28,8 @@ const resolverInscripciones = {
         }
       }
       const inscripciones = await InscriptionModel.find({ ...filtro });
+      console.log(inscripciones)
+      return inscripciones;
     },
   },
   Mutation: {
